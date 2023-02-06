@@ -33,3 +33,6 @@ Click on [Update] button to update the data in the database and go to step-2.
 
 Click [Reset] to reset the form as per the step-2.
 
+![2](https://user-images.githubusercontent.com/77152270/217043851-63565c84-fa78-433b-ac4a-1404343ad275.jpg)
+
+
