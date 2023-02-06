@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Student Enrollment Form</h2>
+            <form>
+                <div class="form-group">
+                    <label for="rollNo">Roll No:</label>
+                    <input type="text" class="form-control" id="rollNo" />
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" class="form-control" id="fullName" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="class">Class:</label>
+                    <input type="text" class="form-control" id="class" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Birth Date:</label>
+                    <input type="date" class="form-control" id="birthDate" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea class="form-control" id="address" disabled></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="enrollmentDate">Enrollment Date:</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        id="enrollmentDate"
+                        disabled
+                        />
+                </div>
+                <button type="button" class="btn btn-primary" id="saveBtn" disabled>
+                    Save
+                </button>
+                <button type="button" class="btn btn-primary" id="updateBtn" disabled>
+                    Update
+                </button>
+                <button type="button" class="btn btn-secondary" id="resetBtn" disabled>
+                    Reset
+                </button>
+            </form>
+        </div>
+        <script>
+            function validateAndGetFormData() {
+                var rollNoVar = $("#rollNo").val();
+                if (rollNoVar === "") {
+                    alert("rollNo Required Value");
+                    $("#rollNo").focus();
+                    return "";
+                }
+                var fullNameVar = $("#fullName").val();
+                if (fullNameVar === "") {
+                    alert("fullName is Required Value");
+                    $("#fullName").focus();
+                    return "";
+                }
+                var classVar = $("#class").val();
+                if (classVar === "") {
+                    alert("class is Required Value");
+                    $("#class").focus();
+                    return "";
+                }
+                var birthDateVar = $("#birthDate").val();
+                if (birthDateVar === "") {
+                    alert("birthDate is Required Value");
+                    $("#birthDate").focus();
+                    return "";
+                }
+                var addressVar = $("#address").val();
+                if (addressVar === "") {
+                    alert("address is Required Value");
+                    $("#address").focus();
+                    return "";
+                }
+                var enrollmentDateVar = $("#enrollmentDate").val();
+                if (enrollmentDateVar === "") {
+                    alert("enrollmentDate is Required Value");
+                    $("#enrollmentDate").focus();
+                    return "";
+                }
+                var jsonStrObj = {
+                    rollNo: rollNoVar,
+                    fullName: fullNameVar,
+                    class: classVar,
+                    birthDate: birthDateVar,
+                    address: addressVar,
+                    enrollmentDate: enrollmentDateVar,
+                };
+                return JSON.stringify(jsonStrObj);
+            }
+
+            // This method is used to create PUT Json request.
+
+            function executeCommand(reqString, dbBaseUrl, apiEndPointUrl) {
+                var url = dbBaseUrl + apiEndPointUrl;
+                var jsonObj;
+                $.post(url, reqString, function (result) {
+                    jsonObj = JSON.parse(result);
+                }).fail(function (result) {
+                    var dataJsonObj = result.responseText;
+                    jsonObj = JSON.parse(dataJsonObj);
+                });
+                return jsonObj;
+            }
+            function resetForm() {
+                $("#rollNo").val("");
+                $("#fullName").val("");
+                $("#class").val("");
+                $("#birthDate").val();
+                $("#address").val();
+                $("#enrollmentDate").val();
+                $("#rollNo").focus("");
+            }
+
+            function resetForm() {
+                $("#rollNo").val("");
+                $("#fullName").val("");
+                $("#class").val("");
+                $("#birthDate").val();
+                $("#address").val();
+                $("#enrollmentDate").val();
+                $("#rollNo").focus("");
+            }
+
+            function saveEmployee() {
+                var jsonStr = validateAndGetFormData();
+                if (jsonStr === "") {
+                    return;
+                }
+                var putReqStr = createPUTRequest(
+                        "90932698|-31949276557164731|90954663",
+                        jsonStr,
+                        "SAMPLE",
+                        "EMP-REL"
+                        );
+                alert(putReqStr);
+                jQuery.ajaxSetup({async: false});
+                var resultObj = executeCommandAtGivenBaseUrl(
+                        putReqStr,
+                        "http://api.login2explore.com:5577",
+                        "/api/iml"
+                        );
+                alert(JSON.stringify(resultObj));
+                jQuery.ajaxSetup({async: true});
+                resetForm();
+            }
+        </script>
+        <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    </body>
+</html>
