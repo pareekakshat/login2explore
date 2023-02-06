@@ -1,6 +1,7 @@
 # login2explore
 
-##Topic:Student Enrollment Form 
+## Topic:Student Enrollment Form 
+
 Student Enrollment Form that will store data in STUDENT-TABLE relation of SCHOOL-DB database.
 
 Input Fields: {Roll-No, Full-Name, Class, Birth-Date, Address, Enrollment-Date}
@@ -8,9 +9,10 @@ Input Fields: {Roll-No, Full-Name, Class, Birth-Date, Address, Enrollment-Date}
 Primary key: Roll No.
 
 
-###Decription
+### Decription
 
-Micro Project Work
+#### Micro Project Work
+
 The form store data in the database. The primary key and input fields of each topic is mentioned.
 
 There will be three control buttons [Save], [Update] and [Reset] at the bottom of the form. On page load or any control button click, an empty form will be displayed and the cursor will remain at the first input field in the form which will have the primary key in the relation. All other fields and buttons should be disabled at this time.
